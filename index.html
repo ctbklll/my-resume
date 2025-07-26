@@ -299,6 +299,7 @@
 </body>
 </html>
 <script>
+
   tailwind.config = {
     theme: {
       extend: {
@@ -321,9 +322,8 @@
         },
       }
     }
-  }
+  };
 
-  // Scroll Animation
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -336,6 +336,16 @@
   document.querySelectorAll('.fade-on-scroll').forEach(section => {
     observer.observe(section);
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuButton = document.getElementById('menu-button');
+    const menu = document.getElementById('menu');
+
+    menuButton.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  });
 </script>
+
 
 
