@@ -60,7 +60,7 @@
         </div>
     </section>
 
-    <section id="about" class="max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-8 bg-black rounded-lg shadow-md">
+    <section id="about" class="fade-on-scroll opacity-0 translate-y-6 max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-8 bg-black rounded-lg shadow-md">
       <div class="md:w-1/2 flex justify-center">
         <img
           src="https://media.istockphoto.com/id/1372399516/th/%E0%B9%80%E0%B8%A7%E0%B8%84%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C/%E0%B8%AA%E0%B8%B5%E0%B8%99%E0%B9%89%E0%B9%8D%E0%B8%B2%E0%B9%80%E0%B8%87%E0%B8%B4%E0%B8%99%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%A1-defocused-%E0%B9%80%E0%B8%84%E0%B8%A5%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%99%E0%B9%84%E0%B8%AB%E0%B8%A7%E0%B9%80%E0%B8%9A%E0%B8%A5%E0%B8%AD%E0%B9%84%E0%B8%A5%E0%B9%88%E0%B8%A3%E0%B8%B0%E0%B8%94%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%B5%E0%B9%80%E0%B8%A7%E0%B8%81%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%9E%E0%B8%B7%E0%B9%89%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%99%E0%B8%B2%E0%B8%A1%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%AD%E0%B9%88%E0%B8%AD%E0%B8%99.jpg?s=612x612&w=0&k=20&c=AQV-b4rMn5aFHy7GDFVk2cR-tnhpGcU6e6suBHJuNXg="
@@ -82,7 +82,7 @@
       </div>
     </section>
 
-    <section id="skills" class="max-w-6xl mx-auto px-6 py-16">
+<section id="skills" class="fade-on-scroll opacity-0 translate-y-6 max-w-6xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold text-white mb-8 text-center">Skills</h2>
 
         <div class="border-2 border-blue-800 rounded-2xl p-5">
@@ -123,7 +123,7 @@
 </section>
 
 
-    <section id="projects" class="max-w-6xl mx-auto px-6 py-16">
+    <section id="projects" class="fade-on-scroll opacity-0 translate-y-6 max-w-6xl mx-auto px-6 py-16">
      <div class="text-center mb-5">
         <p class="text-sm text-gray-400 uppercase tracking-widest">Explore My</p>
         <h2 class="text-3xl font-bold text-white">Projects</h2>
@@ -219,7 +219,7 @@
         </div>
 </section>
 
-<section id="contact" class="max-w-6xl mx-auto px-6 py-16 bg-black rounded-lg shadow-md text-white">
+<section id="contact" class="fade-on-scroll opacity-0 translate-y-6 max-w-6xl mx-auto px-6 py-16 bg-black rounded-lg shadow-md text-white">
   <h2 class="text-3xl font-bold text-center mb-6">contact</h2>
   <h4 class="mt-1 mb-6 text-gray-400 text-center">
     If you're looking for an enthusiastic intern ready to learn and contribute, feel free to contact me through any of the platforms below. I'm looking forward to hearing from you!
@@ -304,16 +304,38 @@
       extend: {
         fontFamily: {
           poppins: ['Poppins', 'sans-serif'],
-        }
+        },
+        keyframes: {
+          'fade-in-up': {
+            '0%': { opacity: '0', transform: 'translateY(20px)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' },
+          },
+          'slide-up': {
+            '0%': { opacity: '0', transform: 'translateY(30px)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' },
+          },
+        },
+        animation: {
+          'fade-in-up': 'fade-in-up 1s ease-out forwards',
+          'slide-up': 'slide-up 0.8s ease-out forwards',
+        },
       }
     }
   }
-  
-  const menuButton = document.getElementById("menu-button");
-  const menu = document.getElementById("menu");
 
-  menuButton.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
+  // Scroll Animation
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-in-up');
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+
+  document.querySelectorAll('.fade-on-scroll').forEach(section => {
+    observer.observe(section);
   });
 </script>
+
 
